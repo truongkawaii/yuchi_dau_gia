@@ -47,7 +47,14 @@
     "originalPrice": "250,000",
     "images": ["./images/sp10.jpeg"]
   },
-
+  {
+    "id": 1,
+    "name": "Balo MSI Essential",
+    "description": "Balo MSI Essential hàng mới.",
+    "startPrice": "200,000",
+    "originalPrice": "490,000",
+    "images": ["./images/balo.jpeg"]
+  },
   {
     "id": 12,
     "name": "Máy Ép Chậm Sunhouse",
@@ -92,14 +99,7 @@
       "./images/sp18-3.jpeg"
     ]
   },
-  {
-    "id": 1,
-    "name": "Balo MSI Essential",
-    "description": "Balo MSI Essential hàng mới.",
-    "startPrice": "200,000",
-    "originalPrice": "490,000",
-    "images": ["./images/balo.jpeg"]
-  },
+
   {
     "id": 19,
     "name": "Nhà búp bê DIY + đầy đủ dụng cụ",
