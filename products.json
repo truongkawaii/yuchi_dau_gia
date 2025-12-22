@@ -5,7 +5,7 @@
     "description": "Cốc sứ + nắp và thìa gỗ",
     "startPrice": "20,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp1.jpeg"],
+    "images": ["./images/sp1.jpeg"],
     "hidden": false
   },
   {
@@ -14,7 +14,7 @@
     "description": "Mua shopee dùng dc 3 lần vẫn còn như mới ạ.",
     "startPrice": "40,000",
     "originalPrice": "125,000",
-    "images": ["images/sp2.jpg"],
+    "images": ["./images/sp2.jpg"],
     "hidden": false
   },
   {
@@ -23,11 +23,11 @@
     "description": "Division Assistant • GA - Division Assistant, xinh đẹp duyên dáng tài năng",
     "startPrice": "300,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp3-2.jpeg", "images/sp3.jpeg"],
+    "images": ["./images/sp3-2.jpeg", "./images/sp3.jpeg"],
     "hidden": true,
     "hiddenName": "🎭 Bữa Tối Bí Mật",
     "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
-    "hiddenImage": "images/mystery-box.jpg"
+    "hiddenImage": "./images/mystery-box.jpg"
   },
   {
     "id": 4,
@@ -35,7 +35,7 @@
     "description": "Vì mặt còn không có nói gì tới có liêm sỉ, bạn có thể mua ảnh người yêu rồi lắp vào mặt con gấu bông.",
     "startPrice": "20,000",
     "originalPrice": "79,000",
-    "images": ["images/sp4.jpg", "images/sp4-2.jpg"],
+    "images": ["./images/sp4.jpg", "./images/sp4-2.jpg"],
     "hidden": false
   },
 
@@ -45,7 +45,7 @@
     "description": "N/A",
     "startPrice": "0",
     "originalPrice": "600,000",
-    "images": ["images/vegeta.jpg"],
+    "images": ["./images/vegeta.jpg"],
     "hidden": false
   },
   {
@@ -54,7 +54,7 @@
     "description": "Tình trạng còn mới nguyên do gần như không dùng mấy",
     "startPrice": "150,000",
     "originalPrice": "343,000",
-    "images": ["images/sp21.jpeg"]
+    "images": ["./images/sp21.jpeg"]
   },
   {
     "id": 6,
@@ -62,11 +62,11 @@
     "description": "Chi tiết: Một bữa ăn tối cùng Anne sales ANZ. Đặc điểm người ăn cùng: Xinh gái, vui vẻ, độc thân lại còn làm sale khéo ăn khéo nói có đc thiên hạ. Người đấu giá sẽ dc mời e Anne đi ăn ạ. Đôi lời từ người bán:'Anh ơi, bên em không có discount đâu, nhưng có em là deal hời nhất rồi'",
     "startPrice": "144đ (giá khởi điểm tượng trưng)",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp6-1.jpg", "images/sp6-2.jpg"],
+    "images": ["./images/sp6-1.jpg", "./images/sp6-2.jpg"],
     "hidden": true,
     "hiddenName": "🎭 Bữa tối Bí Mật #2",
     "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
-    "hiddenImage": "images/mystery-box2.jpg"
+    "hiddenImage": "./images/mystery-box2.jpg"
   },
 
   {
@@ -75,7 +75,7 @@
     "description": "Váy đứng form, chất đẹp, cổ sen vô cùng điệu đà nữ tính, mặc lên chân dài miên man. Hợp đi chơi, đi cà phê hoặc đi làm. Tuy nhiên có thể hơi ngắn với các chị em trên 1m65.",
     "startPrice": "150,000",
     "originalPrice": "350,000",
-    "images": ["images/sp7.jpeg"]
+    "images": ["./images/sp7.jpeg"]
   },
   {
     "id": 8,
@@ -83,7 +83,7 @@
     "description": "Bình dùng để uống trà và giữ nhiệt, sản phẩm còn như mới, nguyên hộp nguyên ly-non.",
     "startPrice": "45,000",
     "originalPrice": "110,000",
-    "images": ["images/sp8.jpg", "images/sp8-2.jpg"]
+    "images": ["./images/sp8.jpg", "./images/sp8-2.jpg"]
   },
   {
     "id": 9,
@@ -91,7 +91,7 @@
     "description": "Túi đựng vật phẩm handmade giáng sinh, vì là đồ handmade nên giá ban đầu sẽ cao hơn xíu ạ.",
     "startPrice": "159,000",
     "originalPrice": "280,000",
-    "images": ["images/sp9.jpg"]
+    "images": ["./images/sp9.jpg"]
   },
   {
     "id": 22,
@@ -99,7 +99,7 @@
     "description": "Sản phẩm đã lắp hoàn thiện, phù hợp cho các ae đam mê xe mô hình Technic",
     "startPrice": "600,000",
     "originalPrice": "1,600,000",
-    "images": ["images/sp22.jpeg"]
+    "images": ["./images/sp22.jpeg"]
   },
   {
     "id": 10,
@@ -107,7 +107,7 @@
     "description": "Set mỹ phẩm dưỡng da 5 món từ thảo mộc thiên nhiên",
     "startPrice": "60,000",
     "originalPrice": "250,000",
-    "images": ["images/sp10.jpeg"]
+    "images": ["./images/sp10.jpeg"]
   },
   {
     "id": 11,
@@ -115,7 +115,7 @@
     "description": "Hàng Bandai Nhật Bản chính hãng, có âm thanh, đầu súng là các loại linh thú khác nhau, mỗi linh thú khi lắp cho ra 1 âm thanh khác nhau. Khi bắn ra các vì tinh tú, dùng vào buổi đêm săn đom đóm.",
     "startPrice": "50,000",
     "originalPrice": "350,000",
-    "images": ["images/sp11.jpg", "images/sp11-2.jpg"]
+    "images": ["./images/sp11.jpg", "./images/sp11-2.jpg"]
   },
   {
     "id": 12,
@@ -123,7 +123,7 @@
     "description": "Mã SUNHOUSE SHD5512, Máy mới 100% chưa qua sử dụng (tuy nhiên vừa hết bảo hành 1 năm)",
     "startPrice": "390,000",
     "originalPrice": "1,200,000",
-    "images": ["images/sp12.jpg"]
+    "images": ["./images/sp12.jpg"]
   },
   {
     "id": 13,
@@ -131,7 +131,7 @@
     "description": "Gấu bông nhỏ xinh vs thiết kế độc đáo, kết hợp giữa con cá mập và ong. Phù hợp để cầm nắm và ném vào mặt đứa nào bạn không ưa.",
     "startPrice": "50,000",
     "originalPrice": "145,000",
-    "images": ["images/sp13.jpeg"]
+    "images": ["./images/sp13.jpeg"]
   },
   {
     "id": 14,
@@ -139,7 +139,7 @@
     "description": "Túi xách nữ style vintage, phù hợp vs những outfit thu đông",
     "startPrice": "45,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp14.jpeg"]
+    "images": ["./images/sp14.jpeg"]
   },
   {
     "id": 15,
@@ -147,7 +147,7 @@
     "description": "Cốc uống nước kèm ống hút thuỷ tinh trang trí theo style quả việt quất đáng yêu, phù hợp để sử dụng và decor.",
     "startPrice": "30,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp15.jpeg"]
+    "images": ["./images/sp15.jpeg"]
   },
   {
     "id": 16,
@@ -156,11 +156,11 @@
     "startPrice": "15,000",
     "originalPrice": "55,000",
     "images": [
-      "images/sp16-5.jpeg",
-      "images/sp16-2.jpeg",
-      "images/sp16-3.jpeg",
-      "images/sp16-4.jpeg",
-      "images/sp16-1.jpeg"
+      "./images/sp16-5.jpeg",
+      "./images/sp16-2.jpeg",
+      "./images/sp16-3.jpeg",
+      "./images/sp16-4.jpeg",
+      "./images/sp16-1.jpeg"
     ]
   },
   {
@@ -169,7 +169,7 @@
     "description": "Trong thời đại công nghệ, đặc biệt AI đang phát triển như hiện nay, việc thấu hiểu hành vi người dùng trên các sàn TMDT, các ứng dụng web là 1 điều rất quan trọng và cần thiết. Nhiều lúc chỉ cần 1 thay đổi nhỏ cũng tạo ra những tác động ko thể lường trước. Tất cả đều nằm trong bộ sách này. ",
     "startPrice": "100,000",
     "originalPrice": "280,000",
-    "images": ["images/sp17.jpg"]
+    "images": ["./images/sp17.jpg"]
   },
   {
     "id": 18,
@@ -177,7 +177,7 @@
     "description": "Dây chuyền nữ bạc blink blink tạo điểm nhấn cho outfit",
     "startPrice": "70,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp18.jpeg", "images/sp18-2.jpeg", "images/sp18-3.jpeg"]
+    "images": ["./images/sp18.jpeg", "./images/sp18-2.jpeg", "./images/sp18-3.jpeg"]
   },
   {
     "id": 19,
@@ -185,7 +185,7 @@
     "description": "Nhà búp bê cổ trang DIY vs đầy đủ dụng cụ phù hợp với những người đam mê đồ handmade và mong muốn đc tự tay xây dựng những mô hình nhỏ xinh. Phù hợp để bonding cùng con trẻ để dạy về tính kiên nhẫn, khả năng quan sát và sự cẩn thận.",
     "startPrice": "400,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp19.jpeg"]
+    "images": ["./images/sp19.jpeg"]
   },
   {
     "id": 20,
@@ -193,6 +193,6 @@
     "description": "Cờ treo tường trang trí hình thiên hà, có thể là để phẳng hơn. Kích cỡ 90 x 70cm",
     "startPrice": "20,000",
     "originalPrice": "Không có sẵn",
-    "images": ["images/sp20.jpeg"]
+    "images": ["./images/sp20.jpeg"]
   }
 ]
