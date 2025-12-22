@@ -1,113 +1,11 @@
 [
   {
-    "id": 1,
-    "name": "Cốc sứ + nắp và thìa gỗ",
-    "description": "Cốc sứ + nắp và thìa gỗ",
-    "startPrice": "20,000",
-    "originalPrice": "Không có sẵn",
-    "images": ["./images/sp1.jpeg"],
-    "hidden": false
-  },
-  {
-    "id": 2,
-    "name": "Loa Bluetooth",
-    "description": "Mua shopee dùng dc 3 lần vẫn còn như mới ạ.",
-    "startPrice": "40,000",
-    "originalPrice": "125,000",
-    "images": ["./images/sp2.jpg"],
-    "hidden": false
-  },
-  {
-    "id": 3,
-    "name": "🌹 Bữa ăn tối cùng Hà Khánh Linh",
-    "description": "Division Assistant • GA - Division Assistant, xinh đẹp duyên dáng tài năng",
-    "startPrice": "300,000",
-    "originalPrice": "Không có sẵn",
-    "images": ["./images/sp3-2.jpeg", "./images/sp3.jpeg"],
-    "hidden": true,
-    "hiddenName": "🎭 Bữa Tối Bí Mật",
-    "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
-    "hiddenImage": "./images/mystery-box.jpg"
-  },
-  {
-    "id": 4,
-    "name": "Gấu bông không có liêm sỉ",
-    "description": "Vì mặt còn không có nói gì tới có liêm sỉ, bạn có thể mua ảnh người yêu rồi lắp vào mặt con gấu bông.",
-    "startPrice": "20,000",
-    "originalPrice": "79,000",
-    "images": ["./images/sp4.jpg", "./images/sp4-2.jpg"],
-    "hidden": false
-  },
-
-  {
-    "id": 5,
-    "name": "Figure PVC Goku and Vegeta",
-    "description": "N/A",
-    "startPrice": "0",
-    "originalPrice": "600,000",
-    "images": ["./images/vegeta.jpg"],
-    "hidden": false
-  },
-  {
-    "id": 21,
-    "name": "Tựa lưng công thái học Ema",
-    "description": "Tình trạng còn mới nguyên do gần như không dùng mấy",
-    "startPrice": "150,000",
-    "originalPrice": "343,000",
-    "images": ["./images/sp21.jpeg"]
-  },
-  {
-    "id": 6,
-    "name": "💃 Bữa ăn tối cùng Anne sales ANZ",
-    "description": "Chi tiết: Một bữa ăn tối cùng Anne sales ANZ. Đặc điểm người ăn cùng: Xinh gái, vui vẻ, độc thân lại còn làm sale khéo ăn khéo nói có đc thiên hạ. Người đấu giá sẽ dc mời e Anne đi ăn ạ. Đôi lời từ người bán:'Anh ơi, bên em không có discount đâu, nhưng có em là deal hời nhất rồi'",
-    "startPrice": "144đ (giá khởi điểm tượng trưng)",
-    "originalPrice": "Không có sẵn",
-    "images": ["./images/sp6-1.jpg", "./images/sp6-2.jpg"],
-    "hidden": true,
-    "hiddenName": "🎭 Bữa tối Bí Mật #2",
-    "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
-    "hiddenImage": "./images/mystery-box2.jpg"
-  },
-
-  {
-    "id": 7,
-    "name": "Váy xinh Thỏ Design",
-    "description": "Váy đứng form, chất đẹp, cổ sen vô cùng điệu đà nữ tính, mặc lên chân dài miên man. Hợp đi chơi, đi cà phê hoặc đi làm. Tuy nhiên có thể hơi ngắn với các chị em trên 1m65.",
-    "startPrice": "150,000",
-    "originalPrice": "350,000",
-    "images": ["./images/sp7.jpeg"]
-  },
-  {
-    "id": 8,
-    "name": "Bình giữ nhiệt kiêm pha trà",
-    "description": "Bình dùng để uống trà và giữ nhiệt, sản phẩm còn như mới, nguyên hộp nguyên ly-non.",
-    "startPrice": "45,000",
-    "originalPrice": "110,000",
-    "images": ["./images/sp8.jpg", "./images/sp8-2.jpg"]
-  },
-  {
-    "id": 9,
-    "name": "Túi đựng mỹ phẩm handmade (3 túi)",
-    "description": "Túi đựng vật phẩm handmade giáng sinh, vì là đồ handmade nên giá ban đầu sẽ cao hơn xíu ạ.",
-    "startPrice": "159,000",
+    "id": 17,
+    "name": "Combo bộ sách UX Research, UX Content",
+    "description": "Trong thời đại công nghệ, đặc biệt AI đang phát triển như hiện nay, việc thấu hiểu hành vi người dùng trên các sàn TMDT, các ứng dụng web là 1 điều rất quan trọng và cần thiết. Nhiều lúc chỉ cần 1 thay đổi nhỏ cũng tạo ra những tác động ko thể lường trước. Tất cả đều nằm trong bộ sách này. ",
+    "startPrice": "100,000",
     "originalPrice": "280,000",
-    "images": ["./images/sp9.jpg"]
-  },
-  {
-    "id": 22,
-    "name": "LEGO TECHNIC 42151Siêu Xe Bugatti Bolide (Chính hãng)",
-    "description": "Sản phẩm đã lắp hoàn thiện, phù hợp cho các ae đam mê xe mô hình Technic",
-    "startPrice": "600,000",
-    "originalPrice": "1,600,000",
-    "images": ["./images/sp22.jpeg"]
-  },
-  {
-    "id": 10,
-    "name": "Đồ trang trí để bàn",
-    "description": "Set mỹ phẩm dưỡng da 5 món từ thảo mộc thiên nhiên",
-    "startPrice": "60,000",
-    "originalPrice": "250,000",
-    "images": ["./images/sp10.jpeg"]
+    "images": ["./images/sp17.jpg"]
   },
   {
     "id": 11,
@@ -117,6 +15,39 @@
     "originalPrice": "350,000",
     "images": ["./images/sp11.jpg", "./images/sp11-2.jpg"]
   },
+  {
+    "id": 6,
+    "name": "💃 Bữa ăn tối cùng Miso (Kéo dài tới 18h)",
+    "description": "Chi tiết: Một bữa ăn tối cùng Miso. Đặc điểm người ăn cùng: Xinh đẹp, vui vẻ, độc thân.",
+    "startPrice": "144đ (giá khởi điểm tượng trưng)",
+    "originalPrice": "Không có sẵn",
+    "images": ["./images/unnamed.jpeg"],
+    "hidden": true,
+    "hiddenName": "🎭 Bữa tối Bí Mật #2",
+    "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
+    "hiddenImage": "./images/mystery-box2.jpg"
+  },
+  {
+    "id": 6,
+    "name": "💃 Bữa ăn tối cùng bạn Thuỷ bên team RO (Kéo dài tới 18h)",
+    "description": "Chi tiết: Xinh đẹp, vui vẻ, độc thân. Lời từ bạn Thuỷ:'Mình rất mong được gặp gỡ và trò chuyện cùng các bạn trong một buổi tối ấm cúng và vui vẻ. Hãy cùng nhau tạo nên những kỷ niệm đáng nhớ nhé!'",
+    "startPrice": "144đ (giá khởi điểm tượng trưng)",
+    "originalPrice": "Không có sẵn",
+    "images": ["./images/thuy.jpeg"],
+    "hidden": true,
+    "hiddenName": "🎭 Bữa tối Bí Mật #2",
+    "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
+    "hiddenImage": "./images/mystery-box2.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Đồ trang trí để bàn",
+    "description": "Set mỹ phẩm dưỡng da 5 món từ thảo mộc thiên nhiên",
+    "startPrice": "60,000",
+    "originalPrice": "250,000",
+    "images": ["./images/sp10.jpeg"]
+  },
+
   {
     "id": 12,
     "name": "Máy Ép Chậm Sunhouse",
@@ -150,34 +81,24 @@
     "images": ["./images/sp15.jpeg"]
   },
   {
-    "id": 16,
-    "name": "Sổ tay bìa cứng",
-    "description": "Sổ tay bìa cứng đã sử dụng vài trang đầu tiên.Giấy bên trong có ô vuông, chấm bi, trắng, đen, kẻ ngang. Có phần cho monthly planning.",
-    "startPrice": "15,000",
-    "originalPrice": "55,000",
-    "images": [
-      "./images/sp16-5.jpeg",
-      "./images/sp16-2.jpeg",
-      "./images/sp16-3.jpeg",
-      "./images/sp16-4.jpeg",
-      "./images/sp16-1.jpeg"
-    ]
-  },
-  {
-    "id": 17,
-    "name": "Combo bộ sách UX Research, UX Content",
-    "description": "Trong thời đại công nghệ, đặc biệt AI đang phát triển như hiện nay, việc thấu hiểu hành vi người dùng trên các sàn TMDT, các ứng dụng web là 1 điều rất quan trọng và cần thiết. Nhiều lúc chỉ cần 1 thay đổi nhỏ cũng tạo ra những tác động ko thể lường trước. Tất cả đều nằm trong bộ sách này. ",
-    "startPrice": "100,000",
-    "originalPrice": "280,000",
-    "images": ["./images/sp17.jpg"]
-  },
-  {
     "id": 18,
     "name": "Dây chuyền bạc 925",
     "description": "Dây chuyền nữ bạc blink blink tạo điểm nhấn cho outfit",
     "startPrice": "70,000",
     "originalPrice": "Không có sẵn",
-    "images": ["./images/sp18.jpeg", "./images/sp18-2.jpeg", "./images/sp18-3.jpeg"]
+    "images": [
+      "./images/sp18.jpeg",
+      "./images/sp18-2.jpeg",
+      "./images/sp18-3.jpeg"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Balo MSI Essential",
+    "description": "Balo MSI Essential hàng mới.",
+    "startPrice": "200,000",
+    "originalPrice": "490,000",
+    "images": ["./images/balo.jpeg"]
   },
   {
     "id": 19,
@@ -186,13 +107,5 @@
     "startPrice": "400,000",
     "originalPrice": "Không có sẵn",
     "images": ["./images/sp19.jpeg"]
-  },
-  {
-    "id": 20,
-    "name": "Cờ treo tường trang trí hình thiên hà",
-    "description": "Cờ treo tường trang trí hình thiên hà, có thể là để phẳng hơn. Kích cỡ 90 x 70cm",
-    "startPrice": "20,000",
-    "originalPrice": "Không có sẵn",
-    "images": ["./images/sp20.jpeg"]
   }
 ]
