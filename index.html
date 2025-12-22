@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Đấu Giá Từ Thiện Noel 2025</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Lights Decoration -->
+    <div class="lights">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>🎄 ĐẤU GIÁ TỪ THIỆN NOEL 2025 🎅</h1>
+        <p>Chia sẻ yêu thương - Lan tỏa hạnh phúc</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Active Product Section -->
+        <div class="active-section">
+            <div class="active-product">
+                <div class="active-product-image">
+                    <div class="slideshow-container">
+                        <img id="activeImage" src="product1.jpg" alt="Sản phẩm đang đấu giá">
+                        <div class="slideshow-dots" id="activeDots"></div>
+                        <button class="slideshow-prev" id="activePrev">❮</button>
+                        <button class="slideshow-next" id="activeNext">❯</button>
+                    </div>
+                </div>
+                <div class="active-product-info">
+                    <h2 id="activeName">Đang tải...</h2>
+                    <p id="activeDescription" style="color: #e0e0e0;"></p>
+                    <div class="price-info">
+                        <p><strong>💰 Giá khởi điểm:</strong> <span class="price" id="activeStartPrice">0 VNĐ</span></p>
+                        <p><strong>🏷️ Giá mua ban đầu:</strong> <span class="price" id="activeOriginalPrice">0 VNĐ</span></p>
+                    </div>
+                    <div class="countdown" id="countdown">
+                        ⏰ Thời gian còn lại: 00:00
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product List Section -->
+        <div class="product-list-section">
+            <h2>📋 DANH SÁCH SẢN PHẨM ĐẤU GIÁ</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
