@@ -361,13 +361,15 @@ function init() {
     document.getElementById('activeNext').addEventListener('click', nextActiveImage);
     
     // Cập nhật mỗi giây
+    let lastProductIndex = getCurrentProductIndex();
+    
     setInterval(() => {
-        const oldIndex = getCurrentProductIndex();
         updateCountdown();
-        const newIndex = getCurrentProductIndex();
+        const currentIndex = getCurrentProductIndex();
         
         // Nếu chuyển sang sản phẩm mới
-        if (oldIndex !== newIndex) {
+        if (lastProductIndex !== currentIndex) {
+            lastProductIndex = currentIndex;
             updateActiveProduct();
             renderProductList();
             // Re-add zoom indicators after render
