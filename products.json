@@ -16,18 +16,6 @@
     "images": ["./images/sp11.jpg", "./images/sp11-2.jpg"]
   },
   {
-    "id": 6,
-    "name": "💃 Bữa ăn tối cùng bạn Thuỷ bên team RO (Kéo dài tới 18h)",
-    "description": "Chi tiết: Xinh đẹp, vui vẻ, độc thân. Lời từ bạn Thuỷ:'Mình rất mong được gặp gỡ và trò chuyện cùng các bạn trong một buổi tối ấm cúng và vui vẻ. Hãy cùng nhau tạo nên những kỷ niệm đáng nhớ nhé!'",
-    "startPrice": "144đ (giá khởi điểm tượng trưng)",
-    "originalPrice": "Không có sẵn",
-    "images": ["./images/thuy.jpeg"],
-    "hidden": true,
-    "hiddenName": "🎭 Bữa tối Bí Mật #2",
-    "hiddenDescription": "Một trải nghiệm đặc biệt sẽ được công bố khi bắt đầu đấu giá",
-    "hiddenImage": "./images/mystery-box2.jpg"
-  },
-  {
     "id": 10,
     "name": "Đồ trang trí để bàn",
     "description": "Set mỹ phẩm dưỡng da 5 món từ thảo mộc thiên nhiên",
