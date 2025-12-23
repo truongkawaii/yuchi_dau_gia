@@ -1,14 +1,14 @@
 // Biến toàn cục
 let products = [];
-let currentActiveImageIndex = 0;
-let activeImageInterval = null;
+let currentActiveImageIndex = [0, 0]; // Mảng cho 2 sản phẩm
+let activeImageInterval = [null, null]; // Mảng cho 2 sản phẩm
 let productImageIntervals = {};
 
 // Thời gian bắt đầu: 2h chiều hôm nay
 const startTime = new Date();
 startTime.setHours(14, 0, 0, 0); // 2:00 PM
 
-// Mỗi sản phẩm đấu giá 10 phút
+// Mỗi cặp sản phẩm đấu giá 10 phút (2 sản phẩm đấu giá song song)
 const AUCTION_DURATION = 10 * 60 * 1000;
 
 // Tải dữ liệu từ JSON file
@@ -38,8 +38,8 @@ function createSnowflakes() {
     }
 }
 
-// Tính toán sản phẩm hiện tại đang đấu giá
-function getCurrentProductIndex() {
+// Tính toán cặp sản phẩm hiện tại đang đấu giá (2 sản phẩm cùng lúc)
+function getCurrentProductPairIndex() {
     const now = new Date();
     const diff = now - startTime;
     
@@ -47,19 +47,41 @@ function getCurrentProductIndex() {
         return -1; // Chưa bắt đầu
     }
     
-    const index = Math.floor(diff / AUCTION_DURATION);
-    return index < products.length ? index : products.length; // Đã kết thúc
+    const pairIndex = Math.floor(diff / AUCTION_DURATION);
+    const totalPairs = Math.ceil(products.length / 2);
+    
+    return pairIndex < totalPairs ? pairIndex : totalPairs; // Đã kết thúc
+}
+
+// Lấy 2 sản phẩm đang đấu giá
+function getCurrentProducts() {
+    const pairIndex = getCurrentProductPairIndex();
+    
+    if (pairIndex === -1 || pairIndex >= Math.ceil(products.length / 2)) {
+        return [null, null];
+    }
+    
+    const index1 = pairIndex * 2;
+    const index2 = pairIndex * 2 + 1;
+    
+    return [
+        index1 < products.length ? products[index1] : null,
+        index2 < products.length ? products[index2] : null
+    ];
 }
 
 // Kiểm tra xem có nên hiển thị thông tin thật hay không
 function shouldRevealProduct(productIndex) {
-    const currentIndex = getCurrentProductIndex();
+    const pairIndex = getCurrentProductPairIndex();
+    const currentPairStart = pairIndex * 2;
     // Chỉ reveal khi sản phẩm đang active hoặc đã qua
-    return currentIndex >= productIndex;
+    return productIndex < currentPairStart + 2 && pairIndex >= 0;
 }
 
 // Lấy thông tin hiển thị của sản phẩm (thật hoặc ẩn)
 function getDisplayProduct(product, productIndex) {
+    if (!product) return null;
+    
     if (product.hidden && !shouldRevealProduct(productIndex)) {
         return {
             name: product.hiddenName || "🎭 Sản Phẩm Bí Mật",
@@ -67,6 +89,7 @@ function getDisplayProduct(product, productIndex) {
             images: [product.hiddenImage || "images/mystery-box.jpg"],
             startPrice: product.startPrice,
             originalPrice: product.originalPrice,
+            productCode: "***-***",
             isHidden: true
         };
     }
@@ -76,22 +99,29 @@ function getDisplayProduct(product, productIndex) {
         images: product.images,
         startPrice: product.startPrice,
         originalPrice: product.originalPrice,
+        productCode: product.id ? `SP-${String(product.id).padStart(3, '0')}` : "---",
         isHidden: false
     };
 }
 
 // Slideshow cho sản phẩm đang đấu giá
-function showActiveImage(index) {
-    const currentIndex = getCurrentProductIndex();
-    if (currentIndex < 0 || currentIndex >= products.length) return;
+function showActiveImage(slotIndex, imageIndex) {
+    const [product1, product2] = getCurrentProducts();
+    const product = slotIndex === 0 ? product1 : product2;
     
-    const product = products[currentIndex];
-    const displayProduct = getDisplayProduct(product, currentIndex);
+    if (!product) return;
+    
+    const pairIndex = getCurrentProductPairIndex();
+    const productIndex = pairIndex * 2 + slotIndex;
+    const displayProduct = getDisplayProduct(product, productIndex);
+    
+    if (!displayProduct) return;
+    
     const images = displayProduct.images;
+    currentActiveImageIndex[slotIndex] = imageIndex;
     
-    currentActiveImageIndex = index;
-    const imgElement = document.getElementById('activeImage');
-    imgElement.src = images[currentActiveImageIndex];
+    const imgElement = document.getElementById(`activeImage${slotIndex + 1}`);
+    imgElement.src = images[currentActiveImageIndex[slotIndex]];
     
     // Thêm hiệu ứng blur nếu đang ẩn
     if (displayProduct.isHidden) {
@@ -101,138 +131,176 @@ function showActiveImage(index) {
     }
     
     // Cập nhật dots
-    updateActiveDots(images.length);
+    updateActiveDots(slotIndex, images.length);
 }
 
-function updateActiveDots(totalImages) {
-    const dotsContainer = document.getElementById('activeDots');
+function updateActiveDots(slotIndex, totalImages) {
+    const dotsContainer = document.getElementById(`activeDots${slotIndex + 1}`);
     dotsContainer.innerHTML = '';
     
     for (let i = 0; i < totalImages; i++) {
         const dot = document.createElement('span');
-        dot.className = `dot ${i === currentActiveImageIndex ? 'active' : ''}`;
-        dot.onclick = () => showActiveImage(i);
+        dot.className = `dot ${i === currentActiveImageIndex[slotIndex] ? 'active' : ''}`;
+        dot.onclick = () => showActiveImage(slotIndex, i);
         dotsContainer.appendChild(dot);
     }
 }
 
-function nextActiveImage() {
-    const currentIndex = getCurrentProductIndex();
-    if (currentIndex < 0 || currentIndex >= products.length) return;
+function nextActiveImage(slotIndex) {
+    const [product1, product2] = getCurrentProducts();
+    const product = slotIndex === 0 ? product1 : product2;
     
-    const product = products[currentIndex];
-    const displayProduct = getDisplayProduct(product, currentIndex);
+    if (!product) return;
+    
+    const pairIndex = getCurrentProductPairIndex();
+    const productIndex = pairIndex * 2 + slotIndex;
+    const displayProduct = getDisplayProduct(product, productIndex);
+    
+    if (!displayProduct) return;
+    
     const images = displayProduct.images;
-    
-    currentActiveImageIndex = (currentActiveImageIndex + 1) % images.length;
-    showActiveImage(currentActiveImageIndex);
+    currentActiveImageIndex[slotIndex] = (currentActiveImageIndex[slotIndex] + 1) % images.length;
+    showActiveImage(slotIndex, currentActiveImageIndex[slotIndex]);
 }
 
-function prevActiveImage() {
-    const currentIndex = getCurrentProductIndex();
-    if (currentIndex < 0 || currentIndex >= products.length) return;
+function prevActiveImage(slotIndex) {
+    const [product1, product2] = getCurrentProducts();
+    const product = slotIndex === 0 ? product1 : product2;
     
-    const product = products[currentIndex];
-    const displayProduct = getDisplayProduct(product, currentIndex);
+    if (!product) return;
+    
+    const pairIndex = getCurrentProductPairIndex();
+    const productIndex = pairIndex * 2 + slotIndex;
+    const displayProduct = getDisplayProduct(product, productIndex);
+    
+    if (!displayProduct) return;
+    
     const images = displayProduct.images;
-    
-    currentActiveImageIndex = (currentActiveImageIndex - 1 + images.length) % images.length;
-    showActiveImage(currentActiveImageIndex);
+    currentActiveImageIndex[slotIndex] = (currentActiveImageIndex[slotIndex] - 1 + images.length) % images.length;
+    showActiveImage(slotIndex, currentActiveImageIndex[slotIndex]);
 }
 
-function startActiveImageSlideshow() {
+function startActiveImageSlideshow(slotIndex) {
     // Dừng slideshow cũ nếu có
-    if (activeImageInterval) {
-        clearInterval(activeImageInterval);
+    if (activeImageInterval[slotIndex]) {
+        clearInterval(activeImageInterval[slotIndex]);
     }
     
-    const currentIndex = getCurrentProductIndex();
-    if (currentIndex < 0 || currentIndex >= products.length) return;
+    const [product1, product2] = getCurrentProducts();
+    const product = slotIndex === 0 ? product1 : product2;
     
-    const product = products[currentIndex];
-    const displayProduct = getDisplayProduct(product, currentIndex);
+    if (!product) return;
+    
+    const pairIndex = getCurrentProductPairIndex();
+    const productIndex = pairIndex * 2 + slotIndex;
+    const displayProduct = getDisplayProduct(product, productIndex);
+    
+    if (!displayProduct) return;
+    
     const images = displayProduct.images;
     
     if (images.length > 1) {
         // Tự động chuyển ảnh mỗi 3 giây
-        activeImageInterval = setInterval(nextActiveImage, 3000);
+        activeImageInterval[slotIndex] = setInterval(() => nextActiveImage(slotIndex), 3000);
     }
 }
 
 // Cập nhật thông tin sản phẩm đang đấu giá
 function updateActiveProduct() {
-    const currentIndex = getCurrentProductIndex();
+    const pairIndex = getCurrentProductPairIndex();
+    const [product1, product2] = getCurrentProducts();
     
-    if (currentIndex === -1) {
-        const firstProduct = products[0];
-        const displayProduct = getDisplayProduct(firstProduct, 0);
+    // Cập nhật cho cả 2 slot
+    for (let slotIndex = 0; slotIndex < 2; slotIndex++) {
+        const product = slotIndex === 0 ? product1 : product2;
+        const productIndex = pairIndex * 2 + slotIndex;
         
-        document.getElementById('activeName').textContent = 'Sắp bắt đầu...';
-        document.getElementById('activeDescription').textContent = 'Đấu giá sẽ bắt đầu lúc 14:00 hôm nay';
-        document.getElementById('activeStartPrice').textContent = '0 VNĐ';
-        document.getElementById('activeOriginalPrice').textContent = '0 VNĐ';
-        document.getElementById('activeImage').src = displayProduct.images[0];
-        document.getElementById('activeDots').innerHTML = '';
-        return;
+        if (pairIndex === -1) {
+            // Chưa bắt đầu
+            const firstProduct = products[slotIndex];
+            const displayProduct = firstProduct ? getDisplayProduct(firstProduct, slotIndex) : null;
+            
+            document.getElementById(`activeName${slotIndex + 1}`).textContent = 'Sắp bắt đầu...';
+            document.getElementById(`activeDescription${slotIndex + 1}`).textContent = 'Đấu giá sẽ bắt đầu lúc 14:00 hôm nay';
+            document.getElementById(`activeStartPrice${slotIndex + 1}`).textContent = '0 VNĐ';
+            document.getElementById(`activeOriginalPrice${slotIndex + 1}`).textContent = '0 VNĐ';
+            document.getElementById(`productCode${slotIndex + 1}`).querySelector('.code-value').textContent = '---';
+            
+            if (displayProduct) {
+                document.getElementById(`activeImage${slotIndex + 1}`).src = displayProduct.images[0];
+            }
+            document.getElementById(`activeDots${slotIndex + 1}`).innerHTML = '';
+            continue;
+        }
+        
+        if (!product || pairIndex >= Math.ceil(products.length / 2)) {
+            // Đã kết thúc hoặc không có sản phẩm
+            document.getElementById(`activeName${slotIndex + 1}`).textContent = slotIndex === 0 && pairIndex >= Math.ceil(products.length / 2) ? 'Đã kết thúc' : 'Không có sản phẩm';
+            document.getElementById(`activeDescription${slotIndex + 1}`).textContent = slotIndex === 0 && pairIndex >= Math.ceil(products.length / 2) ? 'Tất cả sản phẩm đã được đấu giá!' : '';
+            document.getElementById(`activeStartPrice${slotIndex + 1}`).textContent = '0 VNĐ';
+            document.getElementById(`activeOriginalPrice${slotIndex + 1}`).textContent = '0 VNĐ';
+            document.getElementById(`productCode${slotIndex + 1}`).querySelector('.code-value').textContent = '---';
+            document.getElementById(`activeDots${slotIndex + 1}`).innerHTML = '';
+            
+            if (activeImageInterval[slotIndex]) {
+                clearInterval(activeImageInterval[slotIndex]);
+            }
+            continue;
+        }
+        
+        const displayProduct = getDisplayProduct(product, productIndex);
+        
+        if (displayProduct) {
+            document.getElementById(`activeName${slotIndex + 1}`).textContent = displayProduct.name;
+            document.getElementById(`activeDescription${slotIndex + 1}`).textContent = displayProduct.description;
+            document.getElementById(`activeStartPrice${slotIndex + 1}`).textContent = displayProduct.startPrice + ' VNĐ';
+            document.getElementById(`activeOriginalPrice${slotIndex + 1}`).textContent = displayProduct.originalPrice + ' VNĐ';
+            document.getElementById(`productCode${slotIndex + 1}`).querySelector('.code-value').textContent = displayProduct.productCode;
+            
+            // Reset slideshow
+            currentActiveImageIndex[slotIndex] = 0;
+            showActiveImage(slotIndex, 0);
+            startActiveImageSlideshow(slotIndex);
+        }
     }
-    
-    if (currentIndex >= products.length) {
-        document.getElementById('activeName').textContent = 'Đã kết thúc';
-        document.getElementById('activeDescription').textContent = 'Tất cả sản phẩm đã được đấu giá!';
-        document.getElementById('activeStartPrice').textContent = '0 VNĐ';
-        document.getElementById('activeOriginalPrice').textContent = '0 VNĐ';
-        document.getElementById('activeDots').innerHTML = '';
-        if (activeImageInterval) clearInterval(activeImageInterval);
-        return;
-    }
-    
-    const product = products[currentIndex];
-    const displayProduct = getDisplayProduct(product, currentIndex);
-    
-    document.getElementById('activeName').textContent = displayProduct.name;
-    document.getElementById('activeDescription').textContent = displayProduct.description;
-    document.getElementById('activeStartPrice').textContent = displayProduct.startPrice + ' VNĐ';
-    document.getElementById('activeOriginalPrice').textContent = displayProduct.originalPrice + ' VNĐ';
-    
-    // Reset slideshow
-    currentActiveImageIndex = 0;
-    showActiveImage(0);
-    startActiveImageSlideshow();
 }
 
 // Cập nhật countdown
 function updateCountdown() {
-    const currentIndex = getCurrentProductIndex();
-    const countdownEl = document.getElementById('countdown');
+    const pairIndex = getCurrentProductPairIndex();
     
-    if (currentIndex === -1) {
+    for (let slotIndex = 0; slotIndex < 2; slotIndex++) {
+        const countdownEl = document.getElementById(`countdown${slotIndex + 1}`);
+        
+        if (pairIndex === -1) {
+            const now = new Date();
+            const diff = startTime - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            countdownEl.textContent = `⏰ Bắt đầu sau: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            continue;
+        }
+        
+        if (pairIndex >= Math.ceil(products.length / 2)) {
+            countdownEl.textContent = '🎉 Đã kết thúc!';
+            continue;
+        }
+        
         const now = new Date();
-        const diff = startTime - now;
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const pairStartTime = new Date(startTime.getTime() + pairIndex * AUCTION_DURATION);
+        const pairEndTime = new Date(pairStartTime.getTime() + AUCTION_DURATION);
+        const diff = pairEndTime - now;
+        
+        if (diff <= 0) {
+            countdownEl.textContent = '⏰ Thời gian còn lại: 00:00';
+            continue;
+        }
+        
+        const minutes = Math.floor(diff / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        countdownEl.textContent = `⏰ Bắt đầu sau: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        return;
+        countdownEl.textContent = `⏰ Thời gian còn lại: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
-    
-    if (currentIndex >= products.length) {
-        countdownEl.textContent = '🎉 Đã kết thúc tất cả đấu giá!';
-        return;
-    }
-    
-    const now = new Date();
-    const productStartTime = new Date(startTime.getTime() + currentIndex * AUCTION_DURATION);
-    const productEndTime = new Date(productStartTime.getTime() + AUCTION_DURATION);
-    const diff = productEndTime - now;
-    
-    if (diff <= 0) {
-        countdownEl.textContent = '⏰ Thời gian còn lại: 00:00';
-        return;
-    }
-    
-    const minutes = Math.floor(diff / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    countdownEl.textContent = `⏰ Thời gian còn lại: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 // Slideshow cho product card
@@ -262,10 +330,10 @@ function createProductSlideshow(productId, images, isHidden) {
     productImageIntervals[productId] = interval;
 }
 
- // Render danh sách sản phẩm
+// Render danh sách sản phẩm
 function renderProductList() {
     const grid = document.getElementById('productGrid');
-    const currentIndex = getCurrentProductIndex();
+    const pairIndex = getCurrentProductPairIndex();
     
     grid.innerHTML = '';
     
@@ -274,20 +342,21 @@ function renderProductList() {
     productImageIntervals = {};
     
     products.forEach((product, index) => {
-        const productStartTime = new Date(startTime.getTime() + index * AUCTION_DURATION);
-        const productEndTime = new Date(productStartTime.getTime() + AUCTION_DURATION);
+        const productPairIndex = Math.floor(index / 2);
+        const pairStartTime = new Date(startTime.getTime() + productPairIndex * AUCTION_DURATION);
+        const pairEndTime = new Date(pairStartTime.getTime() + AUCTION_DURATION);
         
-        const hours = productStartTime.getHours().toString().padStart(2, '0');
-        const minutes = productStartTime.getMinutes().toString().padStart(2, '0');
-        const endHours = productEndTime.getHours().toString().padStart(2, '0');
-        const endMinutes = productEndTime.getMinutes().toString().padStart(2, '0');
+        const hours = pairStartTime.getHours().toString().padStart(2, '0');
+        const minutes = pairStartTime.getMinutes().toString().padStart(2, '0');
+        const endHours = pairEndTime.getHours().toString().padStart(2, '0');
+        const endMinutes = pairEndTime.getMinutes().toString().padStart(2, '0');
         
         let statusClass = '';
         let statusText = `${hours}:${minutes} - ${endHours}:${endMinutes}`;
         
-        if (index < currentIndex) {
+        if (productPairIndex < pairIndex) {
             statusClass = 'completed';
-        } else if (index === currentIndex) {
+        } else if (productPairIndex === pairIndex) {
             statusClass = 'active';
             statusText = '🔴 ĐANG ĐẤU GIÁ';
         }
@@ -325,6 +394,7 @@ function renderProductList() {
                 ${dotsHTML}
             </div>
             <h3>${displayProduct.name}</h3>
+            <p><strong>Mã SP:</strong> ${displayProduct.productCode}</p>
             <p><strong>Giá khởi điểm:</strong> ${displayProduct.startPrice} VNĐ</p>
             <p><strong>Giá gốc:</strong> ${displayProduct.originalPrice} VNĐ</p>
             <p style="font-size: 0.9em; color: #ccc;">${displayProduct.description}</p>
@@ -345,7 +415,6 @@ function renderProductList() {
     }, 100);
 }
 
-
 // Khởi tạo
 function init() {
     createSnowflakes();
@@ -356,20 +425,22 @@ function init() {
     // Khởi tạo zoom features
     initZoomFeatures();
     
-    // Event listeners cho nút prev/next
-    document.getElementById('activePrev').addEventListener('click', prevActiveImage);
-    document.getElementById('activeNext').addEventListener('click', nextActiveImage);
+    // Event listeners cho nút prev/next của cả 2 sản phẩm
+    document.getElementById('activePrev1').addEventListener('click', () => prevActiveImage(0));
+    document.getElementById('activeNext1').addEventListener('click', () => nextActiveImage(0));
+    document.getElementById('activePrev2').addEventListener('click', () => prevActiveImage(1));
+    document.getElementById('activeNext2').addEventListener('click', () => nextActiveImage(1));
     
     // Cập nhật mỗi giây
-    let lastProductIndex = getCurrentProductIndex();
+    let lastPairIndex = getCurrentProductPairIndex();
     
     setInterval(() => {
         updateCountdown();
-        const currentIndex = getCurrentProductIndex();
+        const currentPairIndex = getCurrentProductPairIndex();
         
-        // Nếu chuyển sang sản phẩm mới
-        if (lastProductIndex !== currentIndex) {
-            lastProductIndex = currentIndex;
+        // Nếu chuyển sang cặp sản phẩm mới
+        if (lastPairIndex !== currentPairIndex) {
+            lastPairIndex = currentPairIndex;
             updateActiveProduct();
             renderProductList();
             // Re-add zoom indicators after render
@@ -379,8 +450,6 @@ function init() {
         }
     }, 1000);
 }
-
-
 
 // ============================================
 // ZOOM IMAGE FUNCTIONALITY
@@ -444,33 +513,35 @@ function closeZoom() {
     if (!zoomOverlay) return;
     
     zoomOverlay.classList.remove('active');
-    document.body.classList.remove('zoom-active');
+    document.body.classList.remove('active');
     isZoomed = false;
 }
 
 // Add zoom indicators to images
 function addZoomIndicators() {
-    // Add to active product slideshow
-    const activeContainer = document.querySelector('.slideshow-container');
-    if (activeContainer && !activeContainer.querySelector('.zoom-indicator')) {
-        const indicator = document.createElement('div');
-        indicator.className = 'zoom-indicator';
-        indicator.innerHTML = '🔍 Click để phóng to';
-        activeContainer.appendChild(indicator);
-        
-        // Add click handler for active image
-        const activeImg = activeContainer.querySelector('img');
-        activeContainer.addEventListener('click', (e) => {
-            // Don't zoom if clicking on prev/next buttons
-            if (e.target.closest('.slideshow-prev') || e.target.closest('.slideshow-next') || e.target.closest('.slideshow-dots')) {
-                return;
-            }
+    // Add to active product slideshow (cả 2 sản phẩm)
+    for (let i = 1; i <= 2; i++) {
+        const activeContainer = document.querySelector(`#activeImage${i}`).closest('.slideshow-container');
+        if (activeContainer && !activeContainer.querySelector('.zoom-indicator')) {
+            const indicator = document.createElement('div');
+            indicator.className = 'zoom-indicator';
+            indicator.innerHTML = '🔍 Click để phóng to';
+            activeContainer.appendChild(indicator);
             
-            const isBlurred = activeImg.style.filter && activeImg.style.filter.includes('blur');
-            if (!isBlurred) {
-                openZoom(activeImg.src);
-            }
-        });
+            // Add click handler for active image
+            const activeImg = activeContainer.querySelector('img');
+            activeContainer.addEventListener('click', (e) => {
+                // Don't zoom if clicking on prev/next buttons
+                if (e.target.closest('.slideshow-prev') || e.target.closest('.slideshow-next') || e.target.closest('.slideshow-dots')) {
+                    return;
+                }
+                
+                const isBlurred = activeImg.style.filter && activeImg.style.filter.includes('blur');
+                if (!isBlurred) {
+                    openZoom(activeImg.src);
+                }
+            });
+        }
     }
 }
 
@@ -561,7 +632,6 @@ function initZoomFeatures() {
     addWheelZoom();
     addDragToPan();
 }
-
 
 // Chạy khi trang load xong
 window.addEventListener('load', loadProducts);
